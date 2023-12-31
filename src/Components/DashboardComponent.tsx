@@ -75,7 +75,58 @@ export const Navbar = () => {
   )
 }
 
+// interface salesWIseProps{
+//   data: []
+// }
+
+interface salesWIseProps {
+  name: string;
+  amount: string;
+  percentage: string;
+}
+
+const SalesComparisonChart = ({ data }: { data: salesWIseProps[] }) => {
+  const colors = ["8639BA", "AE45C6", "E958A1", "E8E465", "F2B45C", "EF7075"]
+  const dataWithColors = data.map((item, index) => ({
+    ...item,
+    color: colors[index % colors.length],
+  }));
+  return (
+    <>
+      <div className="px-6 w-full py-4 flex flex-col gap-2 text-white">
+        {dataWithColors.map(item => {
+          return (
+            <>
+              <div className="grid grid-cols-5 gap-4">
+                <h1 className="text-[13px]">{item.name}</h1>
+                <div className="col-span-4 flex gap-2">
+                  <div style={{ "width": `${item.amount}%`, "backgroundColor": `#${item.color}` }} className="h-5 flex items-center justify-center text-white">
+                  <h1>{item.amount} AED</h1>
+                  </div>
+                  <h1>{item.percentage}%
+                  </h1>
+                </div>
+              </div>
+            </>
+          )
+        })}
+      </div>
+    </>
+  );
+};
+
+
+
 const DashboardComponent = () => {
+
+  const salesWiseData = [
+    { name: 'Dining', amount: '99', percentage: '30' },
+    { name: 'Takeaway', amount: '86', percentage: '18' },
+    { name: 'Delivery', amount: '68', percentage: '16' },
+    { name: 'Talabat', amount: '55', percentage: '14' },
+    { name: 'Zomato', amount: '51', percentage: '12' },
+    { name: 'Swiggy', amount: '45', percentage: '10' },
+  ];
 
   return (
     <>
@@ -86,7 +137,7 @@ const DashboardComponent = () => {
         <div className="dashboard-first-left xl:w-[55%] grid grid-rows-10 gap-2 h-full bg-red-300 py-1 px-2">
 
           <div className="dashboard-first-left-mini-parent text-white grid lg:grid-cols-5 md:grid-cols-6 gap-2 md:gap-4 row-span-3 ">
-            <div className="bg-[#141414] md:col-span-3 lg:col-span-1 pl-4 py-3 flex flex-col justify-between gap-1">
+            <div className="bg-[#141414] md:col-span-3 lg:col-span-1 pl-4 py-3 flex flex-col justify-between gap-2 lg:gap-1">
               <div className="flex gap-5 items-center">
                 <h1 className="text-xs">Today Sales</h1>
                 <div>
@@ -102,7 +153,7 @@ const DashboardComponent = () => {
                 <h1>8 % than yesterday</h1>
               </div>
             </div>
-            <div className="bg-[#141414] md:col-span-3 lg:col-span-1 pl-4 py-3 flex flex-col justify-between">
+            <div className="bg-[#141414] md:col-span-3 lg:col-span-1 pl-4 py-3 flex flex-col justify-between gap-2 lg:gap-1">
               <div>
                 <h1 className="text-xs">Top sale time</h1>
               </div>
@@ -114,7 +165,7 @@ const DashboardComponent = () => {
                 <h1>12 pm - 3 pm</h1>
               </div>
             </div>
-            <div className="bg-[#141414] md:col-span-4 lg:col-span-1 pl-4 py-3 flex flex-col justify-between">
+            <div className="bg-[#141414] md:col-span-4 lg:col-span-1 pl-4 py-3 flex flex-col justify-between gap-2 lg:gap-1">
               <div>
                 <h1 className="text-xs">Door delivery sales</h1>
               </div>
@@ -126,7 +177,7 @@ const DashboardComponent = () => {
                 <h1>Bills 08</h1>
               </div>
             </div>
-            <div className="bg-[#141414] pl-4 py-3 flex flex-col gap-2">
+            <div className="bg-[#141414] pl-4 py-3 flex flex-col gap-2 lg:gap-1">
               <div>
                 <h1 className="text-xs">Bills & Pax</h1>
               </div>
@@ -143,16 +194,25 @@ const DashboardComponent = () => {
             </div>
           </div>
 
-          <div className="dashboard-first-left-big-three-parent grid xl:grid-cols-9 md:grid-cols-4 gap-3 row-span-7">
-            <div className="bg-teal-200 md:col-span-4 xl:col-span-5"></div>
-            <div className="bg-teal-200 md:col-span-2"></div>
-            <div className="bg-teal-200 md:col-span-2"></div>
+          <div className=" grid xl:grid-cols-9 md:grid-cols-4 gap-3 row-span-7">
+            <div className="bg-[#141414] h-fit rounded-[15px] md:col-span-4 xl:col-span-5">
+              <div className="flex justify-between px-7 pt-3">
+                <h1 className="text-white">Sales wise comparison</h1>
+                <div className="text-[#2DFF1A] flex items-center">
+                  <div><IoMdArrowDropup /></div>
+                  <h1>3%</h1>
+                </div>
+              </div>
+              <SalesComparisonChart data={salesWiseData} />
+            </div>
+            <div className="bg-[#141414] rounded-[15px] md:col-span-2"></div>
+            <div className="bg-[#141414] rounded-[15px] md:col-span-2"></div>
           </div>
 
         </div>
 
         <div className="dashboard-first-right xl:w-[45%] w-full h-full bg-indigo-400">
-            <div className="h-80"></div>
+          <div className="h-80"></div>
         </div>
       </div>
 

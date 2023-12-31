@@ -57,14 +57,17 @@
     }
 }
 
-.dashboard-first-left-mini-parent div{
-    border-radius: 15px;
+
+.dashboard-main{
+    font-family: 'Poppins', sans-serif;
 }
 
-.dashboard-first-left-big-three-parent div{
+.dashboard-first-left-mini-parent div{
     border-radius: 15px;
 }
 
 .dashboard-second-parent div{
     border-radius: 15px;
 }
+
+
