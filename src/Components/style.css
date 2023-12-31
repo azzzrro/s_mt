@@ -56,3 +56,15 @@
         margin-top: 60px;
     }
 }
+
+.dashboard-first-left-mini-parent div{
+    border-radius: 15px;
+}
+
+.dashboard-first-left-big-three-parent div{
+    border-radius: 15px;
+}
+
+.dashboard-second-parent div{
+    border-radius: 15px;
+}
