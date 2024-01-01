@@ -3,7 +3,8 @@
 ## Run the project locally
 
 ### 1. Clone the project 
-### 2. Run the following commands 
+### 2. Move to the project folder
+### 3. Run the following commands
 
 ```
 1. npm install
