@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-### Run the project locally
+## Run the project locally
 
 #### 1. Clone the project 
 #### 2. Move to the project folder
@@ -11,6 +11,16 @@ npm install
 ```
 ```
 npm run dev
+```
+
+## Navigation
+#### 1. Login page
+```
+http://localhost:5173
+```
+#### 2. Dashboard page
+```
+http://localhost:5173/dashboard
 ```
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
