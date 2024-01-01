@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-## Run the project locally
+## ⚙️ Run the project locally
 
 #### 1. Clone the project 
 #### 2. Move to the project folder
@@ -13,7 +13,7 @@ npm install
 npm run dev
 ```
 
-## Navigation
+## 🧭 Navigation
 #### 1. Login page
 ```
 http://localhost:5173
