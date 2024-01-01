@@ -250,15 +250,16 @@ const DashboardComponent = () => {
       },
       xAxis: {
         type: 'category',
-        // boundaryGap: false,
-        // axisLine: { show: false }, // this will hide the x-axis line
-        // axisTick: { show: false },
+        boundaryGap: false,
+        name:"Date",
+        axisLine: { show: false }, // this will hide the x-axis line
+        axisTick: { show: false },
         data: Array.from({ length: 30 }, (_, i) => i + 1)
       },
       yAxis: {
         type: 'value',
-        // axisLine: { show: false }, // this will hide the y-axis line
-        // axisTick: { show: false }, // this will hide the y-axis tick marks
+        axisLine: { show: false }, // this will hide the y-axis line
+        axisTick: { show: false }, // this will hide the y-axis tick marks
         splitLine: { show: false },
         max: 3000
       },
@@ -407,7 +408,7 @@ const DashboardComponent = () => {
 
           <div className="dashboard-first-right xl:w-[45%] w-full h-fit py-1">
             <div className="h-[360px] overflow-x-scroll overflow-y-hidden child bg-[#141414]  rounded-[15px]">
-              <div id="main" style={{ width: "100%", height: 400 }} />
+              <div id="main" style={{ width: 2000, height: 400 }} />
             </div>
           </div>
         </div>
