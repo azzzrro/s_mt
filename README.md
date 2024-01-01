@@ -1,10 +1,10 @@
 # React + TypeScript + Vite
 
-## Run the project locally
+### Run the project locally
 
-### 1. Clone the project 
-### 2. Move to the project folder
-### 3. Run the following commands
+#### 1. Clone the project 
+#### 2. Move to the project folder
+#### 3. Run the following commands
 
 ```
 npm install

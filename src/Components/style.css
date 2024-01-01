@@ -67,10 +67,21 @@ body{
 }
 
 .dashboard-first-left-mini-parent .child{
+    z-index: 999;
     border-radius: 15px;
     box-shadow: 0px 0px 25px 0px #292929;
 }
 
-.dashboard-first-left-bottom .sales-wise-comparison-chart{
+
+.dashboard-first-left-bottom .child{
     box-shadow: 0px 0px 25px 0px #292929;
 }
+
+.dashboard-first-right .child{
+    box-shadow: 0px 0px 25px 0px #292929;
+}
+
+.dashboard-second-parent .child {
+    box-shadow: 0px 0px 25px 0px #292929;
+}
+/* shadow-zinc-700 shadow-2xl */

@@ -296,7 +296,7 @@ const DashboardComponent = () => {
             </div>
 
             <div className="dashboard-first-left-bottom h-fit grid xl:grid-cols-9 md:grid-cols-4 gap-3 row-span-7">
-              <div className="sales-wise-comparison-chart bg-[#141414] h-fit rounded-[15px] md:col-span-4 xl:col-span-5">
+              <div className="child bg-[#141414] h-fit rounded-[15px] md:col-span-4 xl:col-span-5">
                 <div className="flex justify-between px-7 pt-3">
                   <h1 className="text-white font-semibold">Sales wise comparison</h1>
                   <div className="text-[#2DFF1A] flex items-center">
@@ -306,7 +306,7 @@ const DashboardComponent = () => {
                 </div>
                 <SalesComparisonChart data={salesWiseData} />
               </div>
-              <div className="bg-[#141414] shadow-zinc-700 shadow-2xl bottom-two h-full text-white rounded-[15px] md:col-span-2">
+              <div className="bg-[#141414] child h-full text-white rounded-[15px] md:col-span-2">
                 <div className="h-full xl:py-2 py-4 px-4 xl:gap-0 gap-4 flex flex-col justify-around">
                   <h1 className="text-xs font-semibold">Total purchase</h1>
                   <div className="">
@@ -325,7 +325,7 @@ const DashboardComponent = () => {
                   </div>
                 </div>
               </div>
-              <div className="bg-[#141414] shadow-zinc-700 shadow-2xl bottom-three h-full text-white rounded-[15px] md:col-span-2">
+              <div className="bg-[#141414] child h-full text-white rounded-[15px] md:col-span-2">
                 <div className="h-full xl:py-2 py-4 px-4 flex xl:gap-0 gap-4 flex-col justify-around">
                   <h1 className="text-xs font-semibold">Total Payments</h1>
                   <div className="">
@@ -348,23 +348,23 @@ const DashboardComponent = () => {
 
           </div>
 
-          <div className="dashboard-first-right xl:w-[45%] w-full h-full bg-indigo-400">
-            <div className="h-[370px]"></div>
+          <div className="dashboard-first-right xl:w-[45%] w-full h-fit py-1">
+            <div className="h-[360px] child bg-[#141414]  rounded-[15px]"></div>
           </div>
         </div>
 
         <div className="dashboard-second-parent w-screen h-fit px-10 flex flex-col gap-2 xl:grid xl:grid-cols-7 xl:gap-3 py-2">
 
-          <div className="bg-[#141414] shadow-zinc-700 shadow-2xl rounded-[15px] lg:col-span-3">
+          <div className="bg-[#141414] child rounded-[15px] lg:col-span-3">
             
           </div>
-          <div className="bg-[#141414] shadow-zinc-700 shadow-2xl text-white rounded-[15px] lg:col-span-2  py-5 px-6">
+          <div className="bg-[#141414] child text-white rounded-[15px] lg:col-span-2  py-5 px-6">
             <div className="w-full">
               <h1 className="text-sm font-semibold">Top 5 selling product</h1>
               <Top5ProductsChart data={top5ProductsData} />
             </div>
           </div>
-          <div className="bg-[#141414] shadow-zinc-700 shadow-2xl text-white rounded-[15px] lg:col-span-2 py-5 px-6">
+          <div className="bg-[#141414] child text-white rounded-[15px] lg:col-span-2 py-5 px-6">
             <div className="w-full">
               <h1 className="text-sm font-semibold">Least 5 selling product</h1>
               <Least5ProductsChart data={least5ProducstData} />
