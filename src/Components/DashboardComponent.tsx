@@ -7,7 +7,6 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import { SlCalender } from "react-icons/sl";
 import { IoMdArrowDropup } from "react-icons/io";
-
 import * as echarts from 'echarts';
 
 
@@ -208,7 +207,6 @@ export const Least5ProductsChart = ({ data }: { data: least5ProductsProps[] }) =
 const DashboardComponent = () => {
 
   // DUMMY DATA FOR SALES WISE DATA CHART
-
   const salesWiseData = [
     { name: 'Dining', amount: '99', percentage: '30' },
     { name: 'Takeaway', amount: '86', percentage: '18' },
@@ -220,7 +218,6 @@ const DashboardComponent = () => {
 
 
   // DUMMY DATA FOR TOP 5 SELLING PRODUCTS
-
   const top5ProductsData = [
     { name: "Chicken sizzler", price: "55.5", piece: "5" },
     { name: "Special burger", price: "35", piece: "2" },
@@ -230,7 +227,6 @@ const DashboardComponent = () => {
   ]
 
   // DUMMY DATA FOR LEAST 5 SELLING PRODUCTS
-
   const least5ProducstData = [
     { name: "Open item", price: 55, piece: 1 },
     { name: "Delivery charged", price: 60, piece: 5 },
@@ -245,10 +241,11 @@ const DashboardComponent = () => {
 
   // DAY WISE COMPARISON CHART & PIE CHART
 
+  const [totalAmount, settotalAmount] = useState(0)
+
   useEffect(() => {
 
-    //DUMMY DATA FOR DAY WISE COMPARISON CHART
-
+    // DUMMY DATA FOR DAY WISE COMPARISON CHART
     const dateData = []
     for (let i = 1; i <= 30; i++) {
       dateData.push(i)
@@ -317,9 +314,7 @@ const DashboardComponent = () => {
 
 
 
-
     // DUMMY DATA FOR PIE CHART
-
     const pieData = [
       { value: 900, name: 'Cash' },
       { value: 735, name: 'Credit card' },
@@ -327,17 +322,26 @@ const DashboardComponent = () => {
       { value: 484, name: 'Credit' },
     ]
 
+    const sum = pieData.reduce((a, b) => a + b.value, 0)
+    settotalAmount(sum)
+
     const piechartDom = document.getElementById('piechart')!;
     const pieChart = echarts.init(piechartDom);
 
     const pieOption = {
-      tooltip: {
-        trigger: 'item'
+      legend: {
+        top: '81%',
+        itemHeight: 12, 
+        itemWidth: 15,
+        textStyle: {
+          color: 'white',
+        },
       },
       series: [
         {
           name: 'Access From',
           type: 'pie',
+          center: ['50%', '41%'],
           radius: ['40%', '70%'],
           avoidLabelOverlap: false,
           itemStyle: {
@@ -350,15 +354,20 @@ const DashboardComponent = () => {
           emphasis: {
             label: {
               show: true,
-              fontSize: 10,
-              fontWeight: 'bold'
-            }
+              fontSize: 15,
+              fontWeight: 'bold',
+              color: 'white',
+              formatter: '{b}:\n{c} AED',
+            },
+            labelLine: {
+              show: false,
+            },
           },
           labelLine: {
-            show: false
+            show: false,
           },
-          data: pieData
-        }
+          data: pieData,
+        },
       ]
     };
 
@@ -494,8 +503,8 @@ const DashboardComponent = () => {
           </div>
 
           <div className="dashboard-first-right py-1 col-span-1">
-            <div className="w-full h-full child bg-[#141414] grid grid-rows-12 grid-flow-col rounded-[15px] pr-3">
-              <div className="flex gap-3 row-span-2 justify-between px-20 items-center">
+            <div className="w-full h-full child py-10 lg:py-0 overflow-x-scroll overflow-y-hidden bg-[#141414] grid grid-rows-12 grid-flow-col rounded-[15px] pr-3">
+              <div className="flex gap-8 mb-3 lg:gap-3 row-span-2 lg:mt-3 justify-between px-10 lg:px-20 items-center">
                 <h1 className="text-white font-medium text-lg">Day wise comparison</h1>
                 <div className="flex font-medium gap-2">
                   <h1 className="text-black rounded-[8px] px-2 bg-white cursor-pointer">Day</h1>
@@ -503,7 +512,7 @@ const DashboardComponent = () => {
                 </div>
               </div>
               <div className="row-span-1 flex items-end w-[100%] px-5"><h1 className="text-white text-xs">Price</h1></div>
-              <div className="row-span-9  overflow-x-scroll w-[100%] overflow-y-hidden day-wise-chart">
+              <div className="row-span-9 mt-2 lg:mt-0 w-[100%] overflow-x-scroll overflow-y-hidden day-wise-chart">
                 <div id="main" style={{ width: 2000, height: "100%" }} />
               </div>
               <div className="row-span-12 px-2 flex items-end py-7 "><h1 className="text-white text-xs">Date</h1></div>
@@ -513,13 +522,17 @@ const DashboardComponent = () => {
 
         <div className="dashboard-second-parent w-screen h-fit flex flex-col gap-2 xl:grid xl:grid-cols-7 xl:gap-3 py-2 px-6">
 
-          <div className="bg-[#141414] child rounded-[15px] grid grid-cols-7 lg:col-span-3">
-              <div className="col-span-4">
-
+          <div className="bg-[#141414] px-10 py-10 lg:py-0 child gap-5 lg:gap-0 rounded-[15px] grid lg:grid-cols-6 lg:col-span-3">
+            <div className="lg:col-span-3  text-white flex flex-col justify-center gap-4  ">
+              <h1 className="text-xl">Collection distribution</h1>
+              <div>
+                <h1>Total amount</h1>
+                <h1 className="text-3xl">{totalAmount} AED</h1>
               </div>
-              <div className="col-span-3">
+            </div>
+            <div className="lg:col-span-3 ">
               <div id="piechart" style={{ width: "100%", height: "100%" }} />
-              </div>
+            </div>
           </div>
           <div className="bg-[#141414] child text-white rounded-[15px] lg:col-span-2 py-5 px-6">
             <h1 className="text-sm font-semibold">Top 5 selling product</h1>

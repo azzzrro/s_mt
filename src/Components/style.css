@@ -67,9 +67,9 @@ body{
 }
 
 .dashboard-first-left-mini-parent .child{
-    z-index: 999;
     border-radius: 15px;
     box-shadow: 0px 0px 25px 0px #292929;
+    overflow: hidden;
 }
 
 
@@ -102,3 +102,7 @@ body{
     border-radius: 10px;
  }
 
+
+.dashboard-first-right .child::-webkit-scrollbar {
+    display: none;
+}
