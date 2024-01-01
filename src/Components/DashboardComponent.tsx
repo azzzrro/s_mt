@@ -12,6 +12,9 @@ import * as echarts from 'echarts';
 
 
 
+
+// NAVBAR COMPONENT
+
 export const Navbar = () => {
 
   const [mobileView, setmobileView] = useState(false)
@@ -79,7 +82,8 @@ export const Navbar = () => {
 }
 
 
-///Sales Comparison Chart Component
+// SALES COMPARISON CHART COMPONENT
+
 interface salesWIseProps {
   name: string;
   amount: string;
@@ -117,7 +121,7 @@ export const SalesComparisonChart = ({ data }: { data: salesWIseProps[] }) => {
 };
 
 
-///Top 5 Selling Products Chart Component
+// TOP 5 SELLING PRODUCTS CHART
 
 interface top5ProductsProps {
   name: string
@@ -156,7 +160,7 @@ export const Top5ProductsChart = ({ data }: { data: top5ProductsProps[] }) => {
 }
 
 
-///Least 5 Selling Products Chart Component
+// LEAST 5 SELLING PRODUCTS CHART
 
 interface least5ProductsProps {
   name: string
@@ -203,7 +207,7 @@ export const Least5ProductsChart = ({ data }: { data: least5ProductsProps[] }) =
 
 const DashboardComponent = () => {
 
-  // Dummy data for salesWiseData chart
+  // DUMMY DATA FOR SALES WISE DATA CHART
 
   const salesWiseData = [
     { name: 'Dining', amount: '99', percentage: '30' },
@@ -215,7 +219,7 @@ const DashboardComponent = () => {
   ];
 
 
-  // Dummy data for top 5 selling products
+  // DUMMY DATA FOR TOP 5 SELLING PRODUCTS
 
   const top5ProductsData = [
     { name: "Chicken sizzler", price: "55.5", piece: "5" },
@@ -225,7 +229,7 @@ const DashboardComponent = () => {
     { name: "Beef biriyani", price: "29.75", piece: "3" }
   ]
 
-  // Dummy data for Least 5 selling products
+  // DUMMY DATA FOR LEAST 5 SELLING PRODUCTS
 
   const least5ProducstData = [
     { name: "Open item", price: 55, piece: 1 },
@@ -236,35 +240,65 @@ const DashboardComponent = () => {
   ]
 
 
-  // Day wise comparison chart
+
+
+
+  // DAY WISE COMPARISON CHART
 
   useEffect(() => {
 
+    //DUMMY DATA FOR DAY WISE COMPARISON CHART
+
+    const dateData = []
+    for (let i = 1; i <= 30; i++) {
+      dateData.push(i)
+    }
+
+    const priceData = []
+    for (let i = 1; i <= 30; i++) {
+      priceData.push(Math.floor(Math.random() * 3001))
+    }
 
     const chartDom = document.getElementById('main')!;
     const myChart = echarts.init(chartDom);
 
     const options = {
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        backgroundColor: 'grey',
+        textStyle: {
+          color: 'white'
+        },
+        borderWidth: 1,
+        borderColor: 'white',
+        padding: 10,
+        borderRadius: 5
+      },
+      grid: {
+        left: '1.2%',
+        right: '0',
+        top: '9%',
+        bottom: '5%',
+        containLabel: true
       },
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        name:"Date",
-        axisLine: { show: false }, // this will hide the x-axis line
+        name: "Date",
+        axisLine: { show: false },
         axisTick: { show: false },
-        data: Array.from({ length: 30 }, (_, i) => i + 1)
+        data: dateData
       },
       yAxis: {
         type: 'value',
-        axisLine: { show: false }, // this will hide the y-axis line
-        axisTick: { show: false }, // this will hide the y-axis tick marks
+        axisLine: { show: false },
+        axisTick: { show: false },
         splitLine: { show: false },
-        max: 3000
+        max: 3000,
+        interval: 1000
       },
       series: [{
-        data: Array.from({ length: 30 }, () => Math.floor(Math.random() * 3001)),
+        data: priceData,
         type: 'line',
         smooth: true,
         showSymbol: false,
@@ -272,7 +306,10 @@ const DashboardComponent = () => {
           { offset: 0, color: 'green' },
           { offset: 0.5, color: 'yellow' },
           { offset: 1, color: 'red' }
-        ])
+        ]),
+        lineStyle: {
+          width: 5
+        }
       }]
     };
 
@@ -290,10 +327,10 @@ const DashboardComponent = () => {
     <>
       <Navbar />
 
-      <div className="dashboard-main h-fit w-screen bg-[#141414]">
-        <div className="w-screen h-fit xl:flex px-10">
+      <div className="dashboard-main h-fit w-screen">
+        <div className="w-screen h-fit xl:grid xl:grid-cols-2 xl:gap-3 px-6">
 
-          <div className="dashboard-first-left xl:w-[55%] grid lg:grid-rows-10 gap-2 h-fit py-1 px-2">
+          <div className="dashboard-first-left grid lg:grid-rows-10 gap-2 h-fit py-1">
 
             <div className="dashboard-first-left-mini-parent text-white grid lg:grid-cols-5 md:grid-cols-6 gap-2 md:gap-4 row-span-3 ">
               <div className="child bg-[#141414] md:col-span-3 lg:col-span-1 pl-4 py-3 flex flex-col justify-between gap-2 lg:gap-1">
@@ -406,29 +443,36 @@ const DashboardComponent = () => {
 
           </div>
 
-          <div className="dashboard-first-right xl:w-[45%] w-full h-fit py-1">
-            <div className="h-[360px] overflow-x-scroll overflow-y-hidden child bg-[#141414]  rounded-[15px]">
-              <div id="main" style={{ width: 2000, height: 400 }} />
+          <div className="dashboard-first-right py-1 col-span-1">
+            <div className="w-full h-full child bg-[#141414] grid grid-rows-12 grid-flow-col rounded-[15px] pr-3">
+              <div className="flex gap-3 row-span-2 justify-between px-20 items-center">
+                <h1 className="text-white font-medium text-lg">Day wise comparison</h1>
+                <div className="flex font-medium gap-2">
+                  <h1 className="text-black rounded-[8px] px-2 bg-white cursor-pointer">Day</h1>
+                  <h1 className="text-white rounded-[8px] px-2 hover:bg-white hover:text-black cursor-pointer">Month</h1>
+                </div>
+              </div>
+              <div className="row-span-1 flex items-end w-[100%] px-5"><h1 className="text-white text-xs">Price</h1></div>
+              <div className="row-span-9  overflow-x-scroll w-[100%] overflow-y-hidden day-wise-chart">
+                <div id="main" style={{ width: 2000, height: "100%" }} />
+              </div>
+              <div className="row-span-12 px-2 flex items-end py-7 "><h1 className="text-white text-xs">Date</h1></div>
             </div>
           </div>
         </div>
 
-        <div className="dashboard-second-parent w-screen h-fit px-10 flex flex-col gap-2 xl:grid xl:grid-cols-7 xl:gap-3 py-2">
+        <div className="dashboard-second-parent w-screen h-fit flex flex-col gap-2 xl:grid xl:grid-cols-7 xl:gap-3 py-2 px-6">
 
           <div className="bg-[#141414] child rounded-[15px] lg:col-span-3">
 
           </div>
-          <div className="bg-[#141414] child text-white rounded-[15px] lg:col-span-2  py-5 px-6">
-            <div className="w-full">
-              <h1 className="text-sm font-semibold">Top 5 selling product</h1>
-              <Top5ProductsChart data={top5ProductsData} />
-            </div>
+          <div className="bg-[#141414] child text-white rounded-[15px] lg:col-span-2 py-5 px-6">
+            <h1 className="text-sm font-semibold">Top 5 selling product</h1>
+            <Top5ProductsChart data={top5ProductsData} />
           </div>
           <div className="bg-[#141414] child text-white rounded-[15px] lg:col-span-2 py-5 px-6">
-            <div className="w-full">
-              <h1 className="text-sm font-semibold">Least 5 selling product</h1>
-              <Least5ProductsChart data={least5ProducstData} />
-            </div>
+            <h1 className="text-sm font-semibold">Least 5 selling product</h1>
+            <Least5ProductsChart data={least5ProducstData} />
           </div>
         </div>
       </div>
