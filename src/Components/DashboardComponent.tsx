@@ -243,7 +243,7 @@ const DashboardComponent = () => {
 
 
 
-  // DAY WISE COMPARISON CHART
+  // DAY WISE COMPARISON CHART & PIE CHART
 
   useEffect(() => {
 
@@ -315,8 +315,58 @@ const DashboardComponent = () => {
 
     options && myChart.setOption(options);
 
+
+
+
+    // DUMMY DATA FOR PIE CHART
+
+    const pieData = [
+      { value: 900, name: 'Cash' },
+      { value: 735, name: 'Credit card' },
+      { value: 580, name: 'Google pay' },
+      { value: 484, name: 'Credit' },
+    ]
+
+    const piechartDom = document.getElementById('piechart')!;
+    const pieChart = echarts.init(piechartDom);
+
+    const pieOption = {
+      tooltip: {
+        trigger: 'item'
+      },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: ['40%', '70%'],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+          },
+          label: {
+            show: false,
+            position: 'center'
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 10,
+              fontWeight: 'bold'
+            }
+          },
+          labelLine: {
+            show: false
+          },
+          data: pieData
+        }
+      ]
+    };
+
+    pieOption && pieChart.setOption(pieOption);
+
     return () => {
       myChart.dispose();
+      pieChart.dispose()
     };
 
   }, [])
@@ -463,8 +513,13 @@ const DashboardComponent = () => {
 
         <div className="dashboard-second-parent w-screen h-fit flex flex-col gap-2 xl:grid xl:grid-cols-7 xl:gap-3 py-2 px-6">
 
-          <div className="bg-[#141414] child rounded-[15px] lg:col-span-3">
+          <div className="bg-[#141414] child rounded-[15px] grid grid-cols-7 lg:col-span-3">
+              <div className="col-span-4">
 
+              </div>
+              <div className="col-span-3">
+              <div id="piechart" style={{ width: "100%", height: "100%" }} />
+              </div>
           </div>
           <div className="bg-[#141414] child text-white rounded-[15px] lg:col-span-2 py-5 px-6">
             <h1 className="text-sm font-semibold">Top 5 selling product</h1>
