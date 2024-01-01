@@ -4,9 +4,12 @@ import { RiFileExcel2Fill } from "react-icons/ri";
 import { GoArrowLeft } from "react-icons/go";
 import './style.css'
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SlCalender } from "react-icons/sl";
 import { IoMdArrowDropup } from "react-icons/io";
+
+import * as echarts from 'echarts';
+
 
 
 export const Navbar = () => {
@@ -166,7 +169,7 @@ export const Least5ProductsChart = ({ data }: { data: least5ProductsProps[] }) =
   const dataWithColors = data.map((item, index) => ({
     ...item,
     color: colors[index % colors.length],
-    width:item.piece+20
+    width: item.piece + 20
   }));
 
   return (
@@ -194,9 +197,13 @@ export const Least5ProductsChart = ({ data }: { data: least5ProductsProps[] }) =
 
 
 
+
+
+
+
 const DashboardComponent = () => {
 
-  // dummy data for salesWiseData chart
+  // Dummy data for salesWiseData chart
 
   const salesWiseData = [
     { name: 'Dining', amount: '99', percentage: '30' },
@@ -208,7 +215,7 @@ const DashboardComponent = () => {
   ];
 
 
-  // dummy data for top 5 selling products
+  // Dummy data for top 5 selling products
 
   const top5ProductsData = [
     { name: "Chicken sizzler", price: "55.5", piece: "5" },
@@ -218,7 +225,7 @@ const DashboardComponent = () => {
     { name: "Beef biriyani", price: "29.75", piece: "3" }
   ]
 
-  // dummy data for Least 5 selling products
+  // Dummy data for Least 5 selling products
 
   const least5ProducstData = [
     { name: "Open item", price: 55, piece: 1 },
@@ -227,6 +234,56 @@ const DashboardComponent = () => {
     { name: "Budget meal", price: 44, piece: 15 },
     { name: "Goto ser", price: 33, piece: 22 }
   ]
+
+
+  // Day wise comparison chart
+
+  useEffect(() => {
+
+
+    const chartDom = document.getElementById('main')!;
+    const myChart = echarts.init(chartDom);
+
+    const options = {
+      tooltip: {
+        trigger: 'axis'
+      },
+      xAxis: {
+        type: 'category',
+        // boundaryGap: false,
+        // axisLine: { show: false }, // this will hide the x-axis line
+        // axisTick: { show: false },
+        data: Array.from({ length: 30 }, (_, i) => i + 1)
+      },
+      yAxis: {
+        type: 'value',
+        // axisLine: { show: false }, // this will hide the y-axis line
+        // axisTick: { show: false }, // this will hide the y-axis tick marks
+        splitLine: { show: false },
+        max: 3000
+      },
+      series: [{
+        data: Array.from({ length: 30 }, () => Math.floor(Math.random() * 3001)),
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: 'green' },
+          { offset: 0.5, color: 'yellow' },
+          { offset: 1, color: 'red' }
+        ])
+      }]
+    };
+
+    options && myChart.setOption(options);
+
+    return () => {
+      myChart.dispose();
+    };
+
+  }, [])
+
+
 
   return (
     <>
@@ -349,14 +406,16 @@ const DashboardComponent = () => {
           </div>
 
           <div className="dashboard-first-right xl:w-[45%] w-full h-fit py-1">
-            <div className="h-[360px] child bg-[#141414]  rounded-[15px]"></div>
+            <div className="h-[360px] overflow-x-scroll overflow-y-hidden child bg-[#141414]  rounded-[15px]">
+              <div id="main" style={{ width: "100%", height: 400 }} />
+            </div>
           </div>
         </div>
 
         <div className="dashboard-second-parent w-screen h-fit px-10 flex flex-col gap-2 xl:grid xl:grid-cols-7 xl:gap-3 py-2">
 
           <div className="bg-[#141414] child rounded-[15px] lg:col-span-3">
-            
+
           </div>
           <div className="bg-[#141414] child text-white rounded-[15px] lg:col-span-2  py-5 px-6">
             <div className="w-full">
