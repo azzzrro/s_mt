@@ -65,10 +65,10 @@ const LoginComponent = () => {
                     <div className='lg:w-1/2 h-full'>
                         <div className='h-full items-center flex justify-center'>
                             <div className='login-laptop md:w-[85%] lg:w-[45%] w-[90%]'>
-                                <img src="../../public/login_laptop.png" alt="" />
+                                <img src="https://res.cloudinary.com/dxz1rikvk/image/upload/v1704177797/vbfgmvo0wfmdxxqfmwa0.png" alt="" />
                             </div>
                             <div className='w-[70%]'>
-                                <img src="../../public/login_background_vector.png" alt="" />
+                                <img src="https://res.cloudinary.com/dxz1rikvk/image/upload/v1704177795/gsw7qzzdfaqavtkexrsn.png" alt="" />
                             </div>
                         </div>
                     </div>
